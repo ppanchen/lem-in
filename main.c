@@ -6,12 +6,14 @@
 /*   By: ppanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 13:57:31 by ppanchen          #+#    #+#             */
-/*   Updated: 2017/02/20 14:01:13 by ppanchen         ###   ########.fr       */
+/*   Updated: 2017/02/20 15:57:03 by ppanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int		main(int ac, char **av)
 {
+	int i;
 
-	return (0);
+	i = ac;
+	return (i);
 }
