@@ -15,6 +15,7 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include "get_next_line.h"
 # define M(x) x < 0 ? -x : x
 
 typedef struct		s_list
