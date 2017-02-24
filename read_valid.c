@@ -27,6 +27,9 @@ char 	**read_from_stdin(void)
 			str = ret;
 			break;
 		}
+		if (ret[0] == '#' && ft_strcmp(ret, "##start") &&
+				ft_strcmp(ret, "##end"))
+			continue ;
 		str = ft_strjoin_free(&str, &ret);
 		ret = ft_strdup("\n");
 		str = ft_strjoin_free(&str, &ret);
@@ -34,12 +37,4 @@ char 	**read_from_stdin(void)
 	arr = ft_strsplit(str, '\n');
 	ft_strdel(&str);
 	return (arr);
-}
-
-int 	validation(char **str)
-{
-	int	i;
-
-	while ()
-	return (1);
 }

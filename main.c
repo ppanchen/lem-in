@@ -16,10 +16,16 @@ int		main(int ac, char **av)
 {
 	int		i;
 	char 	**input;
+	char 	*str = "8\n"
+			"##start\n"
+			"qwerty -8 9\n"
+			"##end\n"
+			"ger 7 5\n";
+	t_room	*rooms;
 
-	input = read_from_stdin();
-	if (!validation(input))
-		return (ft_printf("ERROR"));
+//	input = read_from_stdin();
+	input = ft_strsplit(str, '\n');
+	rooms = parse_input(input);
 	i = -1;
 	while (input[++i])
 		ft_printf("|%s|\n", input[i]);

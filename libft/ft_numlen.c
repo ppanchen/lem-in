@@ -10,13 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_numlen(int n)
+#include "libft.h"
+
+int	ft_numlen(int in)
 {
 	int i;
+	int	n;
 
-	i = 0;
+	i = in < 0 ? 1 : 0;
+	n = M(in);
 	if (n / 10 == 0)
-		return (1);
+		return (i + 1);
 	else
 	{
 		while (n > 0)
