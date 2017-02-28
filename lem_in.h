@@ -34,6 +34,7 @@ typedef struct		s_room
 
 char 	**read_from_stdin(void);
 t_room	*parse_input(char	**cpy);
-
+t_room	*find_item(t_room *start, char	*name);
+int 	free_struct(t_room *start);
 #endif
 

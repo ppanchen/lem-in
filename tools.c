@@ -1,39 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ppanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/20 16:31:48 by ppanchen          #+#    #+#             */
-/*   Updated: 2017/02/20 16:31:49 by ppanchen         ###   ########.fr       */
+/*   Created: 2017/02/24 19:02:34 by ppanchen          #+#    #+#             */
+/*   Updated: 2017/02/24 19:02:35 by ppanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int		main(int ac, char **av)
+t_room	*find_item(t_room *start, char	*name)
 {
-	int		i;
-	char 	**input;
-	char 	*str = "8\n"
-			"##start\n"
-			"qwerty -8 9\n"
-			"##end\n"
-			"ger 7 5\n"
-			"ger-qwerty\n"
-			"qwerty-ger\n"
-			"qwert-x";
-	t_room	*rooms;
+	t_room	*tmp;
 
-//	input = read_from_stdin();
-	input = ft_strsplit(str, '\n');
-	rooms = parse_input(input);
-	if (!rooms)
-		return (3);
-	i = -1;
-	while (input[++i])
-		ft_printf("|%s|\n", input[i]);
-	while (1);
+	tmp = start;
+	while (tmp)
+	{
+		if (ft_strcmp(tmp->name, name) == 0)
+			return (tmp);
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+int 	free_struct(t_room *start)
+{
+	if (start)
+	{
+		ft_strdel(&start->name);
+		ft_strdel(&start->neighbors);
+		free_struct(start->next);
+		ft_memdel(&start->next);
+	}
 	return (0);
 }
