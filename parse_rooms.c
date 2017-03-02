@@ -12,13 +12,13 @@
 
 #include "lem_in.h"
 
-int 	is_room(char *room)
+int			is_room(char *room)
 {
-	int i;
-	char **str;
-	int k;
+	int		i;
+	char	**str;
+	int		k;
 
-	if (count_chars(room, ' ')!= 2)
+	if (count_chars(room, ' ') != 2)
 		return (0);
 	if (room[0] == '#')
 		room += ft_strstr(room, "##start") == 0 ? 5 : 7;
@@ -29,7 +29,7 @@ int 	is_room(char *room)
 		if (ft_isdigit(str[i][0]) || str[i][0] == '+' || str[i][0] == '-')
 			k = ft_atoi(str[1]);											//here can be a bug!!
 		if ((str[i][0] == '+' ? ft_numlen(k) + 1 - ft_strlen(str[i]) :
-			 ft_numlen(k) - ft_strlen(str[i])) != 0)
+				ft_numlen(k) - ft_strlen(str[i])) != 0)
 			return (0);
 	}
 	i = -1;
@@ -39,11 +39,11 @@ int 	is_room(char *room)
 	return (1);
 }
 
-int		is_connection(char *str, t_room *room)
+int			is_connection(char *str, t_room *room)
 {
 	int		i;
-	char 	**rooms;
-	int 	ret;
+	char	**rooms;
+	int		ret;
 
 	rooms = ft_strsplit(str, '-');
 	i = 0;
@@ -63,7 +63,7 @@ int		is_connection(char *str, t_room *room)
 	return (ret);
 }
 
-void	fill_struct(t_room	**room, char *input)
+void		fill_struct(t_room **room, char *input)
 {
 	*room = (t_room *)malloc(sizeof(t_room));
 	if (input[0] == '#')
@@ -76,13 +76,14 @@ void	fill_struct(t_room	**room, char *input)
 	(*room)->name = ft_strsub(input, 0, ft_strchr(input, ' ') - input);
 	input = ft_strchr(input, ' ') + 1;
 	(*room)->x = ft_atoi(input);
-	input += input[0] == '+' ? ft_numlen((*room)->x) + 2 : ft_numlen((*room)->x) + 1;
+	input += input[0] == '+' ? ft_numlen((*room)->x) + 2 :
+								ft_numlen((*room)->x) + 1;
 	(*room)->y = ft_atoi(input);
 	(*room)->neighbors = ft_strdup("");
 	(*room)->next = 0;
 }
 
-void	fill_neighbor(t_room *ret, char *input)
+void		fill_neighbor(t_room *ret, char *input)
 {
 	char	*name;
 	t_room	*room;
@@ -93,9 +94,10 @@ void	fill_neighbor(t_room *ret, char *input)
 	room->neighbors = ft_strjoin_free(&room->neighbors, &input);
 	input = ft_strdup(" ");
 	room->neighbors = ft_strjoin_free(&room->neighbors, &input);
+	ft_strdel(&name);
 }
 
-t_room	*parse_input(char	**input)
+t_room		*parse_input(char **input)
 {
 	int		i;
 	t_room	*room;
@@ -104,7 +106,10 @@ t_room	*parse_input(char	**input)
 	if ((g_ant = ft_atoi(input[0])) == 0)
 		return (0);
 	i = 1;
-	fill_struct(&ret, input[i]);
+	if (is_room(input[i]))
+		fill_struct(&ret, input[i]);
+	else
+		return (0);
 	room = ret;
 	while (input[++i] && is_room(input[i]))
 	{

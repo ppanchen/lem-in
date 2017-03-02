@@ -17,18 +17,14 @@ int		main(int ac, char **av)
 	int		i;
 	char 	**input;
 	char 	*str = "8\n"
-			"##startqwerty 8 9\n"
-			"##endger 7 5\n"
-			"ger-qwerty\n"
-			"qwerty-ger\n"
-			"qwert-g";
+			"frer 4 5";
 	t_room	*rooms;
 
 //	input = read_from_stdin();
 	input = ft_strsplit(str, '\n');
 	rooms = parse_input(input);
-//	if (!rooms)
-//		return (3);
+	if (!rooms)
+		return (3);
 	i = -1;
 	while (input[++i])
 		ft_printf("|%s|\n", input[i]);
