@@ -18,26 +18,20 @@ int 	is_room(char *room)
 	char **str;
 	int k;
 
-	i = -1;
+	if (count_chars(room, ' ')!= 2)
+		return (0);
 	if (room[0] == '#')
-		return (1);
-	k = 0;
-	while (room[++i])
-		if (room[i] == ' ')
-			k++;
-	if (k != 2)
-		return (0);
+		room += ft_strstr(room, "##start") == 0 ? 5 : 7;
 	str = ft_strsplit(room, ' ');
-	if (ft_isdigit(str[1][0]) || str[1][0] == '+' || str[1][0] == '-')
-		k  = ft_atoi(str[1]);
-	if ((str[1][0] == '+' ? ft_numlen(k) + 1 - ft_strlen(str[1]) :\
-	ft_numlen(k) - ft_strlen(str[1])) != 0)
-		return (0);
-	if (ft_isdigit(str[2][0]) || str[2][0] == '+' || str[2][0] == '-')
-		k  = ft_atoi(str[2]);
-	if ((str[2][0] == '+' ? ft_numlen(k) + 1 - ft_strlen(str[2]) :\
-	ft_numlen(k) - ft_strlen(str[2])) != 0)
-		return (0);
+	i = 0;
+	while (++i != 3)
+	{
+		if (ft_isdigit(str[i][0]) || str[i][0] == '+' || str[i][0] == '-')
+			k = ft_atoi(str[1]);											//here can be a bug!!
+		if ((str[i][0] == '+' ? ft_numlen(k) + 1 - ft_strlen(str[i]) :
+			 ft_numlen(k) - ft_strlen(str[i])) != 0)
+			return (0);
+	}
 	i = -1;
 	while (str[++i])
 		ft_strdel(&str[i]);
@@ -45,30 +39,60 @@ int 	is_room(char *room)
 	return (1);
 }
 
-t_room 	*is_connection(char *str, t_room *room)
+int		is_connection(char *str, t_room *room)
 {
 	int		i;
 	char 	**rooms;
+	int 	ret;
 
 	rooms = ft_strsplit(str, '-');
 	i = 0;
+	ret = 1;
 	while (rooms[i])
 		i++;
 	if (i != 2)
-		free_struct(room);
+		ret = 0;
 	else if (!find_item(room, rooms[0]))
-		free_struct(room);
+		ret = 0;
 	else if (!find_item(room, rooms[1]))
-		free_struct(room);
-	else
-		i = -3;
-	if (i != -3)
-		ft_memdel(&room);
+		ret = 0;
 	i = -1;
 	while (rooms[++i])
 		ft_strdel(&rooms[i]);
 	free(rooms);
-	return (room);
+	return (ret);
+}
+
+void	fill_struct(t_room	**room, char *input)
+{
+	*room = (t_room *)malloc(sizeof(t_room));
+	if (input[0] == '#')
+	{
+		(*room)->role = (ft_strstr(input, "##end") == 0) ? 1 : 2;
+		input += (*room)->role == 1 ? 7 : 5;
+	}
+	else
+		(*room)->role = 0;
+	(*room)->name = ft_strsub(input, 0, ft_strchr(input, ' ') - input);
+	input = ft_strchr(input, ' ') + 1;
+	(*room)->x = ft_atoi(input);
+	input += input[0] == '+' ? ft_numlen((*room)->x) + 2 : ft_numlen((*room)->x) + 1;
+	(*room)->y = ft_atoi(input);
+	(*room)->neighbors = ft_strdup("");
+	(*room)->next = 0;
+}
+
+void	fill_neighbor(t_room *ret, char *input)
+{
+	char	*name;
+	t_room	*room;
+
+	name = ft_strsub(input, 0, ft_strchr(input, '-') - input);
+	input = ft_strdup(ft_strchr(input, '-') + 1);
+	room = find_item(ret, name);
+	room->neighbors = ft_strjoin_free(&room->neighbors, &input);
+	input = ft_strdup(" ");
+	room->neighbors = ft_strjoin_free(&room->neighbors, &input);
 }
 
 t_room	*parse_input(char	**input)
@@ -76,59 +100,21 @@ t_room	*parse_input(char	**input)
 	int		i;
 	t_room	*room;
 	t_room	*ret;
-	char 	*cpy;
-	char 	*name;
 
 	if ((g_ant = ft_atoi(input[0])) == 0)
 		return (0);
-	i = 0;
-	room = (t_room *)malloc(sizeof(t_room));
-	ret = room;
-	cpy = input[++i];
-	if (cpy[0] == '#')
-	{
-		room->role = (ft_strcmp(cpy, "##start") == 0) ? 1 : 2;
-		cpy = input[++i];
-	}
-	else
-		room->role = 0;
-	room->name = ft_strsub(cpy, 0, ft_strchr(cpy, ' ') - cpy);
-	cpy = ft_strchr(cpy, ' ') + 1;
-	room->x = ft_atoi(cpy);
-	cpy += cpy[0] == '+' ? ft_numlen(room->x) + 2 : ft_numlen(room->x) + 1;
-	room->y = ft_atoi(cpy);
-	room->neighbors = ft_strdup("");
-	room->next = 0;
+	i = 1;
+	fill_struct(&ret, input[i]);
+	room = ret;
 	while (input[++i] && is_room(input[i]))
 	{
-		cpy = input[i];
-		room->next = (t_room *)malloc(sizeof(t_room));
+		fill_struct(&(room->next), input[i]);
 		room = room->next;
-		if (cpy[0] == '#')
-		{
-			room->role = (ft_strcmp(cpy, "##start") == 0) ? 1 : 2;
-			cpy = input[++i];
-		}
-		else
-			room->role = 0;
-		room->name = ft_strsub(cpy, 0, ft_strchr(cpy, ' ') - cpy);
-		cpy = ft_strchr(cpy, ' ') + 1;
-		room->x = ft_atoi(cpy);
-		cpy += cpy[0] == '+' ? ft_numlen(room->x) + 2 : ft_numlen(room->x) + 1;
-		room->y = ft_atoi(cpy);
-		room->neighbors = ft_strdup("");
-		room->next = 0;
 	}
 	i--;
-	while (input[++i] && (ret = is_connection(input[i], ret)))
-	{
-		cpy = input[i];
-		name = ft_strsub(cpy, 0, ft_strchr(cpy, '-') - cpy);
-		cpy = ft_strdup(ft_strchr(cpy, '-') + 1);
-		room = find_item(ret, name);
-		room->neighbors = ft_strjoin_free(&room->neighbors, &cpy);
-		cpy = ft_strdup(" ");
-		room->neighbors = ft_strjoin_free(&room->neighbors, &cpy);
-	}
+	while (input[++i] && (is_connection(input[i], ret)))
+		fill_neighbor(ret, input[i]);
+	if (input[i])
+		free_struct(&ret);
 	return (ret);
 }

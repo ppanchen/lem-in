@@ -1,39 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools.c                                            :+:      :+:    :+:   */
+/*   count_chars.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ppanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/24 19:02:34 by ppanchen          #+#    #+#             */
-/*   Updated: 2017/02/24 19:02:35 by ppanchen         ###   ########.fr       */
+/*   Created: 2017/03/02 16:32:37 by ppanchen          #+#    #+#             */
+/*   Updated: 2017/03/02 16:37:25 by ppanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "libft.h"
 
-t_room	*find_item(t_room *start, char	*name)
+int 	count_chars(char *str, char c)
 {
-	t_room	*tmp;
+	int i;
 
-	tmp = start;
-	while (tmp)
+	i = 0;
+	while (*str)
 	{
-		if (ft_strcmp(tmp->name, name) == 0)
-			return (tmp);
-		tmp = tmp->next;
+		if (*str == c)
+			i++;
+		str++;
 	}
-	return (0);
-}
-
-int 	free_struct(t_room **start)
-{
-	if (*start)
-	{
-		ft_strdel(&(*start)->name);
-		ft_strdel(&(*start)->neighbors);
-		free_struct(&(*start)->next);
-		ft_memdel(start);
-	}
-	return (0);
+	return (i);
 }
