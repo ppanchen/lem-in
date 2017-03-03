@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "get_next_line.h"
+# include <stdarg.h>
 # define M(x) x < 0 ? -x : x
 
 typedef struct		s_list
@@ -69,6 +70,8 @@ int					ft_strnequ(char const *s1, char const *s2, size_t n);
 char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strjoin_free(char **s1, char **s2);
+char 				*ft_strjoin_multy(int n, ...);
+char				*ft_strjoin_free_multy(int n, ...);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
 char				*ft_itoa(int n);

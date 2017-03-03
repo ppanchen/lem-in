@@ -30,7 +30,8 @@ int		main(int ac, char **av)
 	rooms = parse_input(input);
 	if (!rooms)
 		return (3);
-	if (valid_struct(rooms)) ;
+	if (valid_struct(rooms))
+		lem_in(rooms);
 //		solution(rooms)
 //	i = -1;
 //	while (input[++i])

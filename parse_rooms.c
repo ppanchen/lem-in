@@ -52,9 +52,9 @@ int			is_connection(char *str, t_room *room)
 		i++;
 	if (i != 2)
 		ret = 0;
-	else if (!find_item(room, rooms[0]))
+	else if (!find_name(room, rooms[0]))
 		ret = 0;
-	else if (!find_item(room, rooms[1]))
+	else if (!find_name(room, rooms[1]))
 		ret = 0;
 	i = -1;
 	while (rooms[++i])
@@ -93,7 +93,7 @@ void		fill_neighbor(t_room *ret, char *input)
 
 	name = ft_strsub(input, 0, ft_strchr(input, '-') - input);
 	input = ft_strdup(ft_strchr(input, '-') + 1);
-	room = find_item(ret, name);
+	room = find_name(ret, name);
 	room->neighbors = ft_strjoin_free(&room->neighbors, &input);
 	input = ft_strdup(" ");
 	room->neighbors = ft_strjoin_free(&room->neighbors, &input);

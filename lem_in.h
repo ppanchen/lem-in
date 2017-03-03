@@ -36,11 +36,13 @@ typedef struct		s_room
 
 char 	**read_from_stdin(void);
 t_room	*parse_input(char	**cpy);
-t_room	*find_item(t_room *start, char	*name);
+t_room	*find_name(t_room *start, char *name);
 t_room	*find_role(t_room *start, int role);
+t_room	*find_num(t_room *start, int num);
 int 	valid_struct(t_room	*room);
 int 	free_struct(t_room **start);
 int 	**creat_map(t_room	*room);
 int 	**paste_neighbors(t_room *room, int **map);
+int 	lem_in(t_room *room);
 #endif
 

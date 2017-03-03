@@ -52,7 +52,7 @@ int 	**paste_neighbors(t_room *room, int **map)
 		neighbors = ft_strsplit(tmp->neighbors, ' ');
 		while(neighbors[++i])
 		{
-			tmp1 = find_item(room, neighbors[i]);
+			tmp1 = find_name(room, neighbors[i]);
 			map[tmp->num][tmp1->num] = 1;
 			map[tmp1->num][tmp->num] = 1;
 		}

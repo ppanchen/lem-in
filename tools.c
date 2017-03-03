@@ -12,7 +12,7 @@
 
 #include "lem_in.h"
 
-t_room	*find_item(t_room *start, char	*name)
+t_room	*find_name(t_room *start, char *name)
 {
 	t_room	*tmp;
 
@@ -34,6 +34,20 @@ t_room	*find_role(t_room *start, int role)
 	while (tmp)
 	{
 		if (tmp->role == role)
+			return (tmp);
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+t_room	*find_num(t_room *start, int num)
+{
+	t_room	*tmp;
+
+	tmp = start;
+	while (tmp)
+	{
+		if (tmp->num == num)
 			return (tmp);
 		tmp = tmp->next;
 	}

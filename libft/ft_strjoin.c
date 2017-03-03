@@ -49,3 +49,42 @@ char	*ft_strjoin_free(char **s1, char **s2)
 	ft_strdel(s2);
 	return (str);
 }
+
+char 	*ft_strjoin_multy(int n, ...)
+{
+	va_list ap;
+	char 	*str;
+	char 	*res;
+	char 	*tmp;
+	int 	i;
+
+	va_start(ap, n);
+	i = -1;
+	res = ft_strdup("");
+	while (++i < n)
+	{
+		str = va_arg(ap, char **);
+		tmp = res;
+		res = ft_strjoin(res, str);
+		ft_strdel(&tmp);
+	}
+	return (res);
+}
+
+char 	*ft_strjoin_free_multy(int n, ...)
+{
+	va_list ap;
+	char 	**str;
+	char 	*res;
+	int 	i;
+
+	va_start(ap, n);
+	i = -1;
+	res = ft_strdup("");
+	while (++i < n)
+	{
+		str = va_arg(ap, char **);
+		res = ft_strjoin_free(&res, str);
+	}
+	return (res);
+}

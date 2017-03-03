@@ -44,26 +44,6 @@ char 	**read_from_stdin(void)
 	return (arr);
 }
 
-int 	check_neighbors(t_room *room)
-{
-	int		**map;
-	int 	i;
-	int 	j;
-
-	map = creat_map(room);
-	map = paste_neighbors(room, map);
-//	TODO function find item using num;
-//	i = -1;
-//	while (map[++i])
-//	{
-//		j = -1;
-//		while (map[i][++j])
-//			ft_printf("|%2d|", map[i][j]);
-//		ft_printf("\n");
-//	}
-	return (1);
-}
-
 int 	valid_struct(t_room *room)
 {
 	t_room	*tmp;
@@ -91,5 +71,5 @@ int 	valid_struct(t_room *room)
 		}
 		tmp = tmp->next;
 	}
-	return (check_neighbors(room));
+	return (1);
 }
