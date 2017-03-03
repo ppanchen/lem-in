@@ -63,7 +63,7 @@ int			is_connection(char *str, t_room *room)
 	return (ret);
 }
 
-void		fill_struct(t_room **room, char *input)
+void		fill_struct(t_room **room, char *input, int ant, int i)
 {
 	*room = (t_room *)malloc(sizeof(t_room));
 	if (input[0] == '#')
@@ -80,6 +80,9 @@ void		fill_struct(t_room **room, char *input)
 								ft_numlen((*room)->x) + 1;
 	(*room)->y = ft_atoi(input);
 	(*room)->neighbors = ft_strdup("");
+	(*room)->ants = (*room)->role == 1 ? ant : 0;
+	(*room)->error = 0;
+	(*room)->num = i;
 	(*room)->next = 0;
 }
 
@@ -100,20 +103,21 @@ void		fill_neighbor(t_room *ret, char *input)
 t_room		*parse_input(char **input)
 {
 	int		i;
+	int		ant;
 	t_room	*room;
 	t_room	*ret;
 
-	if ((g_ant = ft_atoi(input[0])) == 0)
+	if ((ant = ft_atoi(input[0])) == 0)
 		return (0);
 	i = 1;
 	if (is_room(input[i]))
-		fill_struct(&ret, input[i]);
+		fill_struct(&ret, input[i], ant, i - 1);
 	else
 		return (0);
 	room = ret;
 	while (input[++i] && is_room(input[i]))
 	{
-		fill_struct(&(room->next), input[i]);
+		fill_struct(&(room->next), input[i], ant, i - 1);
 		room = room->next;
 	}
 	i--;

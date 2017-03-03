@@ -14,10 +14,12 @@
 # define LEM_IN_H
 #include "libft/libft.h"
 
-int 				g_ant;
+//int 				g_ant;
 typedef struct		s_room
 {
 	char			*name;
+	int 			num;
+	int 			ants;
 	char			*neighbors;
 	int				role;
 	int 			x;
@@ -35,6 +37,10 @@ typedef struct		s_room
 char 	**read_from_stdin(void);
 t_room	*parse_input(char	**cpy);
 t_room	*find_item(t_room *start, char	*name);
+t_room	*find_role(t_room *start, int role);
+int 	valid_struct(t_room	*room);
 int 	free_struct(t_room **start);
+int 	**creat_map(t_room	*room);
+int 	**paste_neighbors(t_room *room, int **map);
 #endif
 

@@ -25,7 +25,7 @@ char 	**read_from_stdin(void)
 		{
 			ft_strdel(&str);
 			str = ret;
-			break;
+			break ;
 		}
 		if (ret[0] == '#' && ft_strcmp(ret, "##start") &&
 				ft_strcmp(ret, "##end"))
@@ -42,4 +42,54 @@ char 	**read_from_stdin(void)
 	arr = ft_strsplit(str, '\n');
 	ft_strdel(&str);
 	return (arr);
+}
+
+int 	check_neighbors(t_room *room)
+{
+	int		**map;
+	int 	i;
+	int 	j;
+
+	map = creat_map(room);
+	map = paste_neighbors(room, map);
+//	TODO function find item using num;
+//	i = -1;
+//	while (map[++i])
+//	{
+//		j = -1;
+//		while (map[i][++j])
+//			ft_printf("|%2d|", map[i][j]);
+//		ft_printf("\n");
+//	}
+	return (1);
+}
+
+int 	valid_struct(t_room *room)
+{
+	t_room	*tmp;
+	t_room	*tmp1;
+
+	tmp = room;
+	while (tmp)
+	{
+		if (tmp->name[0] == 'L')
+			return (0);
+		tmp = tmp->next;
+	}
+	if (!find_role(room, 1) || !find_role(room, 2))
+		return (0);
+	tmp = room;
+	while (tmp)
+	{
+		tmp1 = tmp->next;
+		while (tmp1)
+		{
+			if ((tmp->x == tmp1->x && tmp->y == tmp1->y) ||
+					!ft_strcmp(tmp->name, tmp1->name))
+				return (0);
+			tmp1 = tmp1->next;
+		}
+		tmp = tmp->next;
+	}
+	return (check_neighbors(room));
 }

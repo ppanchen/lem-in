@@ -26,6 +26,20 @@ t_room	*find_item(t_room *start, char	*name)
 	return (0);
 }
 
+t_room	*find_role(t_room *start, int role)
+{
+	t_room	*tmp;
+
+	tmp = start;
+	while (tmp)
+	{
+		if (tmp->role == role)
+			return (tmp);
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
 int 	free_struct(t_room **start)
 {
 	if (*start)
