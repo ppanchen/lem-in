@@ -17,12 +17,20 @@ int		main(int ac, char **av)
 	int		i;
 	char 	**input;
 	char 	*str = "8\n"
-			"frer 4 5\n"
-			"##startfree 5 7\n"
-			"##endend 6 4\n"
-			"en 6 7\n"
-			"en-end\n"
-			"frer-end";
+			"b 4 5\n"
+			"##starta 5 7\n"
+			"##endd 6 4\n"
+			"c 1 0\n"
+			"e 3 4\n"
+			"f 2 2\n"
+			"a-b\n"
+			"a-c\n"
+			"b-e\n"
+			"b-f\n"
+			"c-f\n"
+			"e-d\n"
+			"f-d\n"
+			"a-d\n";
 	t_room	*rooms;
 
 //	input = read_from_stdin();

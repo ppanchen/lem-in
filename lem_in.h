@@ -14,7 +14,6 @@
 # define LEM_IN_H
 #include "libft/libft.h"
 
-//int 				g_ant;
 typedef struct		s_room
 {
 	char			*name;
@@ -27,6 +26,14 @@ typedef struct		s_room
 	int 			error;
 	struct s_room	*next;
 }					t_room;
+
+typedef struct 		s_coord
+{
+	int 			i;
+	int 			j;
+	int 			d;
+	int 			**map;
+}					t_c;
 
 /*
 ** role:	0 - none;
@@ -44,5 +51,7 @@ int 	free_struct(t_room **start);
 int 	**creat_map(t_room	*room);
 int 	**paste_neighbors(t_room *room, int **map);
 int 	lem_in(t_room *room);
+char	*add_paths(int **map, t_room *room, char *str, t_c c);
+
 #endif
 
