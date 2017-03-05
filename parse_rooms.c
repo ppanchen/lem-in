@@ -27,7 +27,7 @@ int			is_room(char *room)
 	while (++i != 3)
 	{
 		if (ft_isdigit(str[i][0]) || str[i][0] == '+' || str[i][0] == '-')
-			k = ft_atoi(str[1]);											//here can be a bug!!
+			k = ft_atoi(str[i]);											//here can be a bug!!
 		if ((str[i][0] == '+' ? ft_numlen(k) + 1 - ft_strlen(str[i]) :
 				ft_numlen(k) - ft_strlen(str[i])) != 0)
 			return (0);

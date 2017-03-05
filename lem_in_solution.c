@@ -96,38 +96,20 @@ char 	*take_path(t_room *room, int **map)
 
 char 	**choose_paths(t_room *room, char **path)
 {
-	char	*tmpstr;
-	char 	**rooms;
 	char	**tmp;
+	char 	**ret;
 	int 	i;
-	int 	j;
 
 	i = -1;
-	j = 0;
 	tmp = ft_strsplit((*path), ' ');
 	free((*path));
-	tmpstr = ft_strdup("");
+	*path = ft_strdup("");
 	while (tmp[++i])
-	{
-		j = 0;
-		rooms = ft_strsplit(tmp[i], '-');
-		while (rooms[j])
-			j++;
-		if ((ft_strcmp(rooms[0], find_role(room, 1)->name) == 0 &&
-				ft_strcmp(rooms[j - 1], find_role(room, 2)->name) == 0) ||
-				(ft_strcmp(rooms[j - 1], find_role(room, 1)->name) == 0 &&
-				ft_strcmp(rooms[0], find_role(room, 2)->name) == 0))
-		{
-			(*path) = tmpstr;
-			tmpstr = ft_strjoin_multy(3, tmpstr, tmp[i], " ");
-			free(*path);
-		}
-		j = -1;
-		while (rooms[++j])
-			ft_strdel(&rooms[j]);
-		free(rooms);
-	}
-	return (ft_strsplit(tmpstr, ' '));
+		checkroom(room, tmp[i], path);
+	ft_arrdel(&tmp);
+	ret = ft_strsplit(*path, ' ');
+	ft_strdel(path);
+	return (ret);
 }
 
 int 	lem_in(t_room *room)

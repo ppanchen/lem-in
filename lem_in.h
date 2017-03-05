@@ -52,6 +52,7 @@ int 	**creat_map(t_room	*room);
 int 	**paste_neighbors(t_room *room, int **map);
 int 	lem_in(t_room *room);
 char	*add_paths(int **map, t_room *room, char *str, t_c c);
+void	checkroom(t_room *room, char *tmp, char **path);
 
 #endif
 
