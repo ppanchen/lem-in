@@ -64,3 +64,40 @@ int 	**paste_neighbors(t_room *room, int **map)
 	}
 	return (map);
 }
+
+void	paste_map(t_room *room, int **map)
+{
+	int		i;
+	int		j;
+	t_room	*tmp;
+	int 	l;
+
+	tmp = room;
+	l = 0;
+	l += ft_printf("|%10s", "");
+	while (tmp)
+	{
+		l += ft_printf("|%10s", tmp->name);
+		tmp = tmp->next;
+	}
+	l += ft_printf("|\n") - 1;
+	i = -1;
+	while (++i < l)
+		ft_printf("-");
+	ft_printf("\n");
+	i = -1;
+	tmp = room;
+	while (map[++i])
+	{
+		ft_printf("|%10s", tmp->name);
+		j = -1;
+		while (map[i][++j])
+			ft_printf("|%10d", map[i][j]);
+		ft_printf("|\n");
+		j = -1;
+		while (++j < l)
+			ft_printf("-");
+		ft_printf("\n");
+		tmp = tmp->next;
+	}
+}

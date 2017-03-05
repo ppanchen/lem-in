@@ -60,6 +60,7 @@ void				*ft_memalloc(size_t size);
 void				ft_memdel(void **ap);
 void				ft_arrdel(char ***arr);
 char 				**ft_arrrev(char **arr);
+void 				ft_arrmemdel(void ***arr);
 char				*ft_strnew(size_t size);
 void				ft_strdel(char **as);
 void				ft_strclr(char *s);

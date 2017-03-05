@@ -22,3 +22,14 @@ void 	ft_arrdel(char ***arr)
 	free(*arr);
 	*arr = NULL;
 }
+
+void 	ft_arrmemdel(void ***arr)
+{
+	int i;
+
+	i = -1;
+	while ((*arr)[++i])
+		ft_memdel(&(*arr)[i]);
+	free(*arr);
+	*arr = NULL;
+}

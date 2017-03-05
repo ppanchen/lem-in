@@ -80,11 +80,13 @@ char 	*take_path(t_room *room, int **map)
 		{
 			if (map[c.i][c.j] == 1)
 			{
-				path = c.i < c.j ?	ft_strjoin_multy(3,\
-				find_num(room, c.i)->name, "-", find_num(room, c.j)->name) :
-					   ft_strjoin_multy(3, find_num(room, c.j)->name,\
-					   "-", find_num(room, c.i)->name);
-				c.d = c.i < c.j ? 1 : 2;
+//				path = c.i < c.j ?	ft_strjoin_multy(3,\
+//				find_num(room, c.i)->name, "-", find_num(room, c.j)->name) :
+//					   ft_strjoin_multy(3, find_num(room, c.j)->name,\
+//					   "-", find_num(room, c.i)->name);
+				path = ft_strjoin_multy(3, find_num(room, c.i)->name, "-", find_num(room, c.j)->name);
+//				c.d = c.i < c.j ? 1 : 2;
+				c.d = 1;
 				tmp =  add_paths(map, room, path, c);
 				path = ft_strjoin_free(&path, &tmp);
 				res = ft_strjoin_free_multy(2, &res, &path);
@@ -122,18 +124,16 @@ int 	lem_in(t_room *room)
 
 	map = creat_map(room);
 	map = paste_neighbors(room, map);
-		i = -1;
-		while (map[++i])
-		{
-			j = -1;
-			while (map[i][++j])
-				ft_printf("|%2d|", map[i][j]);
-			ft_printf("\n");
-		}
+	paste_map(room, map);
 	path = take_path(room, map);
 	paths = choose_paths(room, &path);
+
 	i = -1;
 	while (paths[++i])
 		ft_printf("%s\n", paths[i]);
+	ft_arrdel(&paths);
+	ft_arrmemdel((void ***)&map);
+
+
 	return (1);
 }
