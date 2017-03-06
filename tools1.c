@@ -54,4 +54,3 @@ void	checkroom(t_room *room, char *tmp, char **path)
 	}
 	ft_arrdel(&rooms);
 }
-

@@ -108,6 +108,7 @@ char 	**choose_paths(t_room *room, char **path)
 	*path = ft_strdup("");
 	while (tmp[++i])
 		checkroom(room, tmp[i], path);
+	sort_choose(path);
 	ft_arrdel(&tmp);
 	ret = ft_strsplit(*path, ' ');
 	ft_strdel(path);
@@ -126,14 +127,17 @@ int 	lem_in(t_room *room)
 	map = paste_neighbors(room, map);
 	paste_map(room, map);
 	path = take_path(room, map);
-	paths = choose_paths(room, &path);
-
+	if (!(paths = choose_paths(room, &path)))
+	{
+		ft_printf("Error\n");
+		ft_arrdel(&paths);
+		return (0);
+	}
+//	move_ants(room, paths);
 	i = -1;
 	while (paths[++i])
 		ft_printf("%s\n", paths[i]);
 	ft_arrdel(&paths);
 	ft_arrmemdel((void ***)&map);
-
-
 	return (1);
 }

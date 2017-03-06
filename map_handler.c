@@ -65,39 +65,52 @@ int 	**paste_neighbors(t_room *room, int **map)
 	return (map);
 }
 
+void	print_line(int l, char c)
+{
+	int i;
+
+	i = -1;
+	while (++i < l)
+		ft_printf("%c", c);
+	ft_printf("\n");
+}
+
+void	print_map(char *name, int *map)
+{
+	int j;
+
+	ft_printf("|%-10s", name);
+	j = -1;
+	while (map[++j])
+		if (map[j] == -1)
+			ft_printf("|%-10c", ' ');
+		else
+		ft_printf("|%-10d", map[j]);
+	ft_printf("|\n");
+}
+
 void	paste_map(t_room *room, int **map)
 {
 	int		i;
-	int		j;
 	t_room	*tmp;
 	int 	l;
 
 	tmp = room;
 	l = 0;
-	l += ft_printf("|%10s", "");
+	l += ft_printf("|%-10s", "");
 	while (tmp)
 	{
-		l += ft_printf("|%10s", tmp->name);
+		l += ft_printf("|%-10s", tmp->name);
 		tmp = tmp->next;
 	}
 	l += ft_printf("|\n") - 1;
-	i = -1;
-	while (++i < l)
-		ft_printf("-");
-	ft_printf("\n");
+	print_line(l, '-');
 	i = -1;
 	tmp = room;
 	while (map[++i])
 	{
-		ft_printf("|%10s", tmp->name);
-		j = -1;
-		while (map[i][++j])
-			ft_printf("|%10d", map[i][j]);
-		ft_printf("|\n");
-		j = -1;
-		while (++j < l)
-			ft_printf("-");
-		ft_printf("\n");
+		print_map(tmp->name, map[i]);
+		print_line(l, '-');
 		tmp = tmp->next;
 	}
 }

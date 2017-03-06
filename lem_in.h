@@ -23,7 +23,7 @@ typedef struct		s_room
 	int				role;
 	int 			x;
 	int 			y;
-	int 			error;
+	int 			status;
 	struct s_room	*next;
 }					t_room;
 
@@ -54,6 +54,9 @@ int 	lem_in(t_room *room);
 char	*add_paths(int **map, t_room *room, char *str, t_c c);
 void	checkroom(t_room *room, char *tmp, char **path);
 void	paste_map(t_room *room, int **map);
+void	move_ants(t_room *room, char **path);
+void	sort_choose(char **paths);
+int 	count_rooms(char **room);
 
 #endif
 

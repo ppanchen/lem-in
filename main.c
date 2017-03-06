@@ -18,27 +18,26 @@ int		main(int ac, char **av)
 {
 	int		i;
 	char 	**input;
-//	char 	*str = "3\n"
-//			"2 5 0\n"
-//			"##start0 1 2\n"
-//			"##end1 9 2\n"
-//			"3 5 4\n"
-//			"0-2\n"
-//			"0-3\n"
-//			"2-1\n"
-//			"3-1\n"
-//			"2-3";
+	char 	*str = "3\n"
+			"2 5 0\n"
+			"##start0 1 2\n"
+			"##end1 9 2\n"
+			"3 5 4\n"
+			"0-2\n"
+			"0-3\n"
+			"2-1\n"
+			"3-1\n"
+			"2-3";
 	t_room	*rooms;
 
-	input = read_from_stdin();
-//	input = ft_strsplit(str, '\n');
+//	input = read_from_stdin();
+	input = ft_strsplit(str, '\n');
 	rooms = parse_input(input);
 	if (!rooms)
 		return (3);
 	if (valid_struct(rooms))
 		lem_in(rooms);
-//	free_struct(&rooms);
-//		solution(rooms)
+	free_struct(&rooms);
 //	i = -1;
 //	while (input[++i])
 //		ft_printf("|%s|\n", input[i]);

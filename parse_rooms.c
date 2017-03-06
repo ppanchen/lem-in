@@ -81,7 +81,7 @@ void		fill_struct(t_room **room, char *input, int ant, int i)
 	(*room)->y = ft_atoi(input);
 	(*room)->neighbors = ft_strdup("");
 	(*room)->ants = (*room)->role == 1 ? ant : 0;
-	(*room)->error = 0;
+	(*room)->status = 0;
 	(*room)->num = i;
 	(*room)->next = 0;
 }
