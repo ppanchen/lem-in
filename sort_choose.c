@@ -93,7 +93,7 @@ void	sort_choose(char **paths)
 
 	i = -1;
 	arr = ft_strsplit(*paths, ' ');
-	sort_arr(arr, count_rooms(arr));
+	sort_arr(arr, count_items(arr));
 	ft_strdel(paths);
 	*paths = ft_strdup("");
 	while (arr[++i])

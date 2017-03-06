@@ -56,7 +56,7 @@ void	checkroom(t_room *room, char *tmp, char **path);
 void	paste_map(t_room *room, int **map);
 void	move_ants(t_room *room, char **path);
 void	sort_choose(char **paths);
-int 	count_rooms(char **room);
+int 	count_items(char **room);
 
 #endif
 

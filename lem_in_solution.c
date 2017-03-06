@@ -133,7 +133,7 @@ int 	lem_in(t_room *room)
 		ft_arrdel(&paths);
 		return (0);
 	}
-//	move_ants(room, paths);
+	move_ants(room, paths);
 	i = -1;
 	while (paths[++i])
 		ft_printf("%s\n", paths[i]);

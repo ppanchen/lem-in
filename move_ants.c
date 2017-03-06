@@ -12,7 +12,7 @@
 
 #include "lem_in.h"
 
-int 	count_rooms(char **room)
+int 	count_items(char **room)
 {
 	int		i;
 
@@ -41,14 +41,15 @@ void	move_ants(t_room *room, char **path)
 	int		ants;
 	char	**rooms_name;
 	int 	j;
-	t_room	*tmp;
+	int 	ant_num;
+
 
 	ants = find_role(room, 1)->ants;
 	while (find_role(room, 2)->ants != ants && (i = -1))
 	{
 		while (path[++i] && (rooms_name = ft_strsplit(path[i], '-')))
 		{
-			j = count_rooms(rooms_name);
+			j = count_items(rooms_name);
 			while (rooms_name[--j] && j != 0)
 			{
 				if (find_name(room, rooms_name[j - 1])->ants != 0 &&
