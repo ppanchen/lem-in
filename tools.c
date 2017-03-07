@@ -54,7 +54,7 @@ t_room	*find_num(t_room *start, int num)
 	return (0);
 }
 
-int 	free_struct(t_room **start)
+int		free_struct(t_room **start)
 {
 	if (*start)
 	{
@@ -64,4 +64,20 @@ int 	free_struct(t_room **start)
 		ft_memdel(start);
 	}
 	return (0);
+}
+
+int		find_shortest(t_path **path)
+{
+	int		i;
+	int		sh;
+
+	i = -1;
+	sh = 0;
+	while (path[++i])
+	{
+		if (path[i]->len + path[i]->ants <
+			path[sh]->len + path[sh]->ants)
+			sh = i;
+	}
+	return (sh);
 }

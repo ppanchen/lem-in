@@ -119,7 +119,6 @@ int 	lem_in(t_room *room)
 {
 	int		**map;
 	int 	i;
-	int 	j;
 	char 	*path;
 	char 	**paths;
 
@@ -133,10 +132,12 @@ int 	lem_in(t_room *room)
 		ft_arrdel(&paths);
 		return (0);
 	}
-	move_ants(room, paths);
+	ft_printf("\n\nAvailable paths:\n");
 	i = -1;
 	while (paths[++i])
 		ft_printf("%s\n", paths[i]);
+	ft_printf("\n\n");
+	move_ants(room, paths);
 	ft_arrdel(&paths);
 	ft_arrmemdel((void ***)&map);
 	return (1);

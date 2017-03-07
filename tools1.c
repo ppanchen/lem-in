@@ -54,3 +54,13 @@ void	checkroom(t_room *room, char *tmp, char **path)
 	}
 	ft_arrdel(&rooms);
 }
+
+int		count_items(char **room)
+{
+	int		i;
+
+	i = 0;
+	while (room[i])
+		i++;
+	return (i);
+}

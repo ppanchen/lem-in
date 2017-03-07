@@ -35,6 +35,14 @@ typedef struct 		s_coord
 	int 			**map;
 }					t_c;
 
+typedef struct 		s_path
+{
+	char 			*name;
+	int 			ants;
+	int 			len;
+	int 			*ants_name;
+}					t_path;
+
 /*
 ** role:	0 - none;
 **			1 - start;
@@ -57,6 +65,13 @@ void	paste_map(t_room *room, int **map);
 void	move_ants(t_room *room, char **path);
 void	sort_choose(char **paths);
 int 	count_items(char **room);
+int 	find_shortest(t_path **path);
+void	start_end(t_room *next, t_path *path);
+void	print_step(t_room *current, t_room *next, t_room *start);
+int		find_free_ant(t_path *path);
+void	fill_next_ant(t_room *next, t_room *current,\
+							t_room *room, t_path *path);
+
 
 #endif
 

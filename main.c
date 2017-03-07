@@ -18,16 +18,28 @@ int		main(int ac, char **av)
 {
 	int		i;
 	char 	**input;
-	char 	*str = "3\n"
-			"2 5 0\n"
-			"##start0 1 2\n"
-			"##end1 9 2\n"
-			"3 5 4\n"
-			"0-2\n"
-			"0-3\n"
+	char 	*str = "8\n"
+			"##start1 23 3\n"
+			"2 16 7\n"
+			"3 16 3\n"
+			"4 16 5\n"
+			"5 9 3\n"
+			"6 1 5\n"
+			"7 4 8\n"
+			"##end0 9 5\n"
+			"0-4\n"
+			"0-6\n"
+			"1-3\n"
+			"4-3\n"
+			"5-2\n"
+			"3-5\n"
+			"4-2\n"
 			"2-1\n"
-			"3-1\n"
-			"2-3";
+			"7-6\n"
+			"7-2\n"
+			"7-4\n"
+			"6-5\n"
+			"1-0";
 	t_room	*rooms;
 
 //	input = read_from_stdin();
